@@ -1,0 +1,7 @@
+C:\git\SpaceInvaders\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.exe.config
+C:\git\SpaceInvaders\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+C:\git\SpaceInvaders\SpaceInvaders\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+C:\git\SpaceInvaders\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
+C:\git\SpaceInvaders\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\git\SpaceInvaders\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.exe
+C:\git\SpaceInvaders\SpaceInvaders\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
