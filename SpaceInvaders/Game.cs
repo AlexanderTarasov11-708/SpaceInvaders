@@ -10,16 +10,18 @@ namespace SpaceInvaders
     {
         public static Creature[,] Map;
         public static bool EndGame = false;
-        public static int MaxHealth = 200;
-        public static int YourHealth = MaxHealth;
+        public static int maxHealth = 200;
+        public static int yourPoints = 0;
+        public static int yourHealth = maxHealth;
         public static Random Rand = new Random();
         public static int numberOfAliens;
+        public static int wave;
         
 
         private static char[,] NewMap = new char[20, 21]
         {
             {'#','#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
-            {'#',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '@', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+            {'#',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'V', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
             {'#',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
             {'#',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
             {'#',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
@@ -51,7 +53,7 @@ namespace SpaceInvaders
                         case 'W':
                             gameMap[i, j] = new Player(i, j);
                             break;
-                        case '@':
+                        case 'V':
                             gameMap[i, j] = new Alien(i, j);
                             break;
                         case '#':
@@ -70,30 +72,59 @@ namespace SpaceInvaders
             Map = MapCreator(NewMap);
             while (!EndGame)
             {
+                Console.WindowHeight = 23;
+                Console.WindowWidth = 22;
                 Console.Clear();
                 WriteMap();
-                Console.WriteLine("Health " + YourHealth + "/" + MaxHealth);
+                Console.WriteLine("Health " + yourHealth + "/" + maxHealth);
+                Console.WriteLine("Score: " + yourPoints);
+                Console.Write("Cooldown: ");
+                if (Player.cd == 3)
+                    Console.Write("Yes");
+                else Console.Write("No");
 
                 foreach (var e in Map)
                     if (e != null)
                     e.Act();
                 if (numberOfAliens == 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    EndGame = true;
+                    if (wave < 19)
+                    {
+                        List<int> check = new List<int>();
+                        for (int i = 0; i < wave; i++)
+                        {
+                            int newX = Game.Rand.Next(1, 19);
+                            if (!check.Contains(newX))
+                            {
+                                check.Add(newX);
+                                Game.Map[1, newX] = new Alien(1, newX);
+                            }
+                            else i--;
+                        }
+                    }
+                    else
+                        for (int i = 1; i < 20; i++)
+                            for (int j = 1; j < wave; j++)
+                                Game.Map[i, j] = new Alien(i, j);
+                    wave += 1;
                 }
-                if (YourHealth <= 0)
+                if (yourHealth <= 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     EndGame = true;
                 }
                 System.Threading.Thread.Sleep(100);
             }
             Console.Clear();
-            if (numberOfAliens == 0 && YourHealth > 0)
-                Console.WriteLine("You win!");
-            if (YourHealth <= 0)
-                Console.WriteLine("You lost!");
+            if (numberOfAliens == 0 && yourHealth > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You Win! Your score: " + yourPoints);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Game Over! Your score: " + yourPoints);
+            }
         }
 
         private static void WriteMap()
@@ -108,7 +139,7 @@ namespace SpaceInvaders
                     if (Map[i, j] is Alien)
                     {
                         numberOfAliens++;
-                        Console.Write('@');
+                        Console.Write('V');
                     }
                     if (Map[i, j] is Bullet)
                         Console.Write('|');
