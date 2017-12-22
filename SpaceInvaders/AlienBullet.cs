@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,16 +23,21 @@ namespace SpaceInvaders
                 {
                     Game.Map[Y, X] = null;
                     Y++;
-                    if (!(Game.Map[Y, X] is Border) && !(Game.Map[Y, X] is Player))
+                    if (!(Game.Map[Y, X] is Border) && !(Game.Map[Y, X] is Player) && !(Game.Map[Y, X] is Alien))
                     {
                         Game.Map[Y, X] = this;
+                        flag = true;
+                    }
+                    else if (Game.Map[Y, X] is Alien)
+                    {
+                        Game.Map[Y + 2, X] = this;
                         flag = true;
                     }
                     else if (Game.Map[Y, X] is Player)
                     {
                         var player = (Player)Game.Map[Y, X];
-                        Game.YourHealth -= 20;
-                        if (Game.YourHealth <= 100)
+                        Game.yourHealth -= 20;
+                        if (Game.yourHealth <= 100)
                             Console.ForegroundColor = ConsoleColor.Red;
                     }
                 }
