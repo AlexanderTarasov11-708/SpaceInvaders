@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,7 @@ namespace SpaceInvaders
     {
         public int X;
         public int Y;
+        public static int cd;
 
         public Player(int y, int x) { X = x; Y = y; }
 
@@ -21,15 +22,21 @@ namespace SpaceInvaders
                 switch (key)
                 {
                     case ConsoleKey.A:
+                        cd = 0;
                         GoTo(-1, 0);
                         break;
 
                     case ConsoleKey.D:
+                        cd = 0;
                         GoTo(1, 0);
                         break;
 
                     case ConsoleKey.W:
-                        Game.Map[Y - 1, X] = new Bullet(Y - 1, X);
+                        if (cd < 3)
+                        {
+                            Game.Map[Y - 1, X] = new Bullet(Y - 1, X);
+                            cd += 1;
+                       }
                         break;
                 }
             }
