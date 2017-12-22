@@ -10,12 +10,14 @@ namespace SpaceInvaders
     {
         public int X;
         public int Y;
+        //public int hp = 1;
 
         public Alien(int y, int x) { X = x; Y = y; }
 
         public void Act()
         {
-            int move = Game.Rand.Next(1, 25);
+            if (Y == 18) Game.EndGame = true;
+            int move = Game.Rand.Next(1, 15);
             switch (move)
             {
                 case 1:
@@ -27,7 +29,7 @@ namespace SpaceInvaders
                 case 3:
                     GoTo(1, 0);
                     break;
-                case 4:
+                /*case 4:
                     Game.Map[Y + 1, X] = new AlienBullet(Y + 1, X);
                     break;
                 case 5:
@@ -39,12 +41,13 @@ namespace SpaceInvaders
                 case 7:
                     Game.Map[Y + 1, X] = new AlienBullet(Y + 1, X);
                     break;
+                    */
             }
         }
 
         public void GoTo(int deltaX, int deltaY)
         {
-            if (Game.Map[Y + deltaY, X + deltaX] == null)
+            if (Game.Map[Y + deltaY, X + deltaX] is null || Game.Map[Y + deltaY, X + deltaX] is Bullet)
             {
                 Game.Map[Y, X] = null;
                 X += deltaX;
@@ -55,6 +58,7 @@ namespace SpaceInvaders
 
         public bool Conflict()
         {
+
             return false;
         }
     }
