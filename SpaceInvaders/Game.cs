@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ namespace SpaceInvaders
         public static Random Rand = new Random();
         public static int numberOfAliens;
         public static int wave = 1;
-        
+
 
         private static char[,] NewMap = new char[20, 21]
         {
@@ -67,7 +67,7 @@ namespace SpaceInvaders
             return gameMap;
         }
 
-        public static void Main (string[] args)
+        public static void Main(string[] args)
         {
             Console.WindowHeight = 26;
             Console.WindowWidth = 110;
@@ -99,7 +99,7 @@ namespace SpaceInvaders
 
                 foreach (var e in Map)
                     if (e != null)
-                    e.Act();
+                        e.Act();
                 if (numberOfAliens == 0)
                 {
                     wave++;
@@ -137,7 +137,7 @@ namespace SpaceInvaders
             else
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Game Over! \nLast wave:" + wave +"\nYour score: " + yourPoints);
+                Console.WriteLine("Game Over! \nLast wave:" + wave + "\nYour score: " + yourPoints);
             }
             Console.WriteLine("Press Esc to exit");
             do
@@ -168,24 +168,37 @@ namespace SpaceInvaders
                     if (Map[i, j] is null)
                         Console.Write(' ');
                 }
-                if (i == 0)
-                    Console.Write("\t SPACE INVADERS");
-                if (i == 1)
-                    Console.Write("\t Some rules:");
-                if (i == 2)
-                    Console.Write("\t A - Left move");
-                if (i == 3)
-                    Console.Write("\t D - Right move");
-                if (i == 4)
-                    Console.Write("\t W - shoot");
-                if (i == 5)
-                    Console.Write("\t After 5 shoots from one position you have 'cooldown' and have to move left/right");
-                if (i == 6)
-                    Console.Write("\t Every next wave you get +1 alien");
-                if (i == 7)
-                    Console.Write("\t Every 5th wave you get +20 health");
-                if (i == 8)
-                    Console.Write("\t 19th wave is the last one");
+                switch (i)
+                {
+                    case 0:
+                        Console.Write("\t SPACE INVADERS");
+                        break;
+                    case 1:
+                        Console.Write("\t Some rules:");
+                        break;
+                    case 2:
+                        Console.Write("\t A - Left move");
+                        break;
+                    case 3:
+                        Console.Write("\t D - Right move");
+                        break;
+                    case 4:
+                        Console.Write("\t W - shoot");
+                        break;
+                    case 5:
+                        Console.Write("\t After 5 shoots from one position you have 'cooldown' and have to move left/right");
+                        break;
+                    case 6:
+                        Console.Write("\t Every next wave you get +1 alien");
+                        break;
+                    case 7:
+                        Console.Write("\t Every 5th wave you get +20 health");
+                        break;
+                    case 8:
+                        Console.Write("\t 19th wave is the last one");
+                        break;
+                }
+
                 Console.WriteLine();
             }
         }
