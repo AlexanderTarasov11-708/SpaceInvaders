@@ -17,6 +17,7 @@ namespace SpaceInvaders
         public void Act()
         {
             if (Y == 18) Game.EndGame = true;
+<<<<<<< HEAD
             int variant = Game.Rand.Next(1, 3);
             if (move != 0 && move % 50 == 0)
             {
@@ -29,6 +30,17 @@ namespace SpaceInvaders
             }
             if (move % 15 == 0)
             {
+=======
+            int move = Game.Rand.Next(1, 100);
+            if (move <= 3)
+                GoTo(0, 1);
+            else if (move <= 6 && move > 3)
+                GoTo(-1, 1);
+            else if (move <= 9 && move > 6)
+                GoTo(1, 1);
+            else if (move <= 35 && move > 30)
+            {
+>>>>>>> 25bceb191a9e5435edb563706c36b22b16e8106c
                 if (Y + 1 < Game.Map.GetLength(0))
                     Game.Map[Y + 1, X] = new AlienBullet(Y + 1, X);
             }
