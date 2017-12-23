@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace SpaceInvaders
 {
+    /* 
+     * Space Invaders 
+     * 3-я семестровая работа
+     * Александр Тарасов 11-708
+     * Никита Хохлов 11-708
+     * 
+     * Player - игрок
+     */
     class Player : Creature
     {
         public int X;
