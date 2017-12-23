@@ -27,10 +27,17 @@ namespace SpaceInvaders
 
         public bool Conflict()
         {
-            if (Game.Map[Y-1, X] is AlienBullet || Game.Map[Y - 1, X] is Alien)
+            if (Game.Map[Y - 1, X] is AlienBullet)
             {
                 Game.Map[Y, X] = null;
-                Game.Map[Y-1, X] = null;
+                Game.Map[Y - 1, X] = null;
+                return true;
+            }
+            else if (Game.Map[Y - 1, X] is Alien)
+            {
+                Game.Map[Y, X] = null;
+                Game.Map[Y - 1, X] = null;
+                Game.yourPoints += 10;
                 return true;
             }
             return false;

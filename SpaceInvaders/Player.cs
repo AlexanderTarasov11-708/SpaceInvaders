@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +32,7 @@ namespace SpaceInvaders
                         break;
 
                     case ConsoleKey.W:
-                        if (cd < 3)
+                        if (cd < 5)
                         {
                             Game.Map[Y - 1, X] = new Bullet(Y - 1, X);
                             cd += 1;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,15 +23,15 @@ namespace SpaceInvaders
                 {
                     Game.Map[Y, X] = null;
                     Y++;
-                    if (!(Game.Map[Y, X] is Border) && !(Game.Map[Y, X] is Player) && !(Game.Map[Y, X] is Alien))
+                    if (!(Game.Map[Y, X] is Border) && !(Game.Map[Y, X] is Player) && !(Game.Map[Y, X] is Alien) && !(Game.Map[Y, X] is AlienBullet))
                     {
                         Game.Map[Y, X] = this;
                         flag = true;
                     }
-                    else if (Game.Map[Y, X] is Alien)
+                    else if (Game.Map[Y, X] is AlienBullet)
                     {
-                        Game.Map[Y + 2, X] = this;
-                        flag = true;
+                        Y--;
+                        Game.Map[Y, X] = this;
                     }
                     else if (Game.Map[Y, X] is Player)
                     {
@@ -48,7 +48,7 @@ namespace SpaceInvaders
 
         public bool Conflict()
         {
-            if (Game.Map[Y + 1, X] is Bullet)
+            if ((Y + 1 < Game.Map.GetLength(0)) && (Game.Map[Y + 1, X] is Bullet))
             {
                 Game.Map[Y, X] = null;
                 Game.Map[Y + 1, X] = null;

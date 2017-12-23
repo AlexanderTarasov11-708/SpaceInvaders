@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -79,7 +79,7 @@ namespace SpaceInvaders
                 Console.WriteLine("Health " + yourHealth + "/" + maxHealth);
                 Console.WriteLine("Score: " + yourPoints);
                 Console.Write("Cooldown: ");
-                if (Player.cd == 3)
+                if (Player.cd == 5)
                     Console.Write("Yes");
                 else Console.Write("No");
 
@@ -112,7 +112,7 @@ namespace SpaceInvaders
                 {
                     EndGame = true;
                 }
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(50);
             }
             Console.Clear();
             if (numberOfAliens == 0 && yourHealth > 0)
