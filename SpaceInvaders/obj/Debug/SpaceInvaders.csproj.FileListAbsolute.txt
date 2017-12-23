@@ -26,3 +26,10 @@ D:\Библиотеки\Учёба\Инфа\SpaceInvaders2\SpaceInvaders-master\
 D:\Библиотеки\Учёба\Инфа\SpaceInvaders2\SpaceInvaders-master\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
 D:\Библиотеки\Учёба\Инфа\SpaceInvaders2\SpaceInvaders-master\SpaceInvaders\obj\Debug\SpaceInvaders.exe
 D:\Библиотеки\Учёба\Инфа\SpaceInvaders2\SpaceInvaders-master\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
+C:\SI\SpaceInvaders-master\SpaceInvaders\bin\Debug\SpaceInvaders.exe.config
+C:\SI\SpaceInvaders-master\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+C:\SI\SpaceInvaders-master\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+C:\SI\SpaceInvaders-master\SpaceInvaders\obj\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
+C:\SI\SpaceInvaders-master\SpaceInvaders\obj\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\SI\SpaceInvaders-master\SpaceInvaders\obj\Debug\SpaceInvaders.exe
+C:\SI\SpaceInvaders-master\SpaceInvaders\obj\Debug\SpaceInvaders.pdb

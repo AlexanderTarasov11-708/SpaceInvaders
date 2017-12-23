@@ -12,10 +12,12 @@ namespace SpaceInvaders
         public static bool EndGame = false;
         public static int maxHealth = 200;
         public static int yourPoints = 0;
+        public static int bossHP = 100;
         public static int yourHealth = maxHealth;
         public static Random Rand = new Random();
         public static int numberOfAliens;
         public static int wave = 1;
+        public static bool boss = false;
 
 
         private static char[,] NewMap = new char[20, 21]
@@ -79,7 +81,7 @@ namespace SpaceInvaders
             Console.WriteLine("After 5 shoots from one position you have 'cooldown' and have to move left/right");
             Console.WriteLine("Every next wave you get +1 alien");
             Console.WriteLine("Every 5th wave you get +20 health");
-            Console.WriteLine("19th wave is the last one \n");
+            Console.WriteLine("20th wave is the last one \n");
             Console.WriteLine("Press Enter to start");
             do
             {
@@ -94,8 +96,10 @@ namespace SpaceInvaders
                 Console.WriteLine("Wave: " + wave);
                 Console.Write("Cooldown: ");
                 if (Player.cd == 5)
-                    Console.Write("Yes");
-                else Console.Write("No");
+                    Console.WriteLine("Yes");
+                else Console.WriteLine("No");
+                if (boss)
+                    Console.WriteLine("Boss HP: " + bossHP);
 
                 foreach (var e in Map)
                     if (e != null)
@@ -105,7 +109,7 @@ namespace SpaceInvaders
                     wave++;
                     if (wave % 5 == 0)
                         yourHealth += 20;
-                    if (wave < 19)
+                    if (wave < 20)
                     {
                         List<int> check = new List<int>();
                         for (int i = 0; i < wave; i++)
@@ -120,16 +124,27 @@ namespace SpaceInvaders
                         }
                     }
                     else
-                        EndGame = true;
+                    {
+                        if (!boss)
+                        {
+                            Map[1, 1] = new Boss(1, 1);
+                            boss = true;
+                        }
+
+                    }
                 }
                 if (yourHealth <= 0)
+                    EndGame = true;
+
+                if (bossHP <= 0)
                 {
+                    yourPoints += 500;
                     EndGame = true;
                 }
                 System.Threading.Thread.Sleep(50);
                 Console.Clear();
             }
-            if (numberOfAliens == 0 && yourHealth > 0)
+            if ((numberOfAliens == 0 && yourHealth > 0) || bossHP <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("You Win! Your score: " + yourPoints);
@@ -165,6 +180,11 @@ namespace SpaceInvaders
                         Console.Write('*');
                     if (Map[i, j] is Border)
                         Console.Write('#');
+                    if (Map[i, j] is Boss)
+                    {
+                        Console.Write('@');
+                        numberOfAliens++;
+                    }
                     if (Map[i, j] is null)
                         Console.Write(' ');
                 }

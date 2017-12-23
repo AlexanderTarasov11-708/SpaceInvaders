@@ -40,6 +40,12 @@ namespace SpaceInvaders
                 Game.yourPoints += 10;
                 return true;
             }
+            else if (Game.Map[Y - 1, X] is Boss)
+            {
+                Game.Map[Y, X] = null;
+                Game.bossHP -= 10;
+                return true;
+            }
             return false;
         }
     }
