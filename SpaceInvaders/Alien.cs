@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,23 +17,17 @@ namespace SpaceInvaders
         public void Act()
         {
             if (Y == 18) Game.EndGame = true;
-            int move = Game.Rand.Next(1, 33);
-            switch (move)
+            int move = Game.Rand.Next(1, 100);
+            if (move <= 3)
+                GoTo(0, 1);
+            else if (move <= 6 && move > 3)
+                GoTo(-1, 1);
+            else if (move <= 9 && move > 6)
+                GoTo(1, 1);
+            else if (move <= 35 && move > 30)
             {
-                case 1:
-                    GoTo(0, 1);
-                    break;
-                case 2:
-                    GoTo(-1, 0);
-                    break;
-                case 3:
-                    GoTo(1, 0);
-                    break;
-                case 4:
-                    if (Y+1 < Game.Map.GetLength(0))
+                if (Y + 1 < Game.Map.GetLength(0))
                     Game.Map[Y + 1, X] = new AlienBullet(Y + 1, X);
-                    break;
-
             }
         }
 
