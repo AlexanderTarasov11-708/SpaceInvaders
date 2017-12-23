@@ -1,11 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceInvaders
 {
+    /* 
+     * Space Invaders 
+     * 3-я семестровая работа
+     * Александр Тарасов 11-708
+     * Никита Хохлов 11-708
+     * 
+     * AlienBullet - пуля противника 
+     */
     class AlienBullet : Creature
     {
         public int X;
@@ -37,7 +41,7 @@ namespace SpaceInvaders
                     {
                         var player = (Player)Game.Map[Y, X];
                         Game.yourHealth -= 20;
-                        if (Game.yourHealth <= 100)
+                        if (Game.yourHealth <= 80)
                             Console.ForegroundColor = ConsoleColor.Red;
                     }
                 }

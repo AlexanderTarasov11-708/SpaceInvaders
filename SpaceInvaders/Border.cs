@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpaceInvaders
+﻿namespace SpaceInvaders
 {
+    /* 
+     * Space Invaders 
+     * 3-я семестровая работа
+     * Александр Тарасов 11-708
+     * Никита Хохлов 11-708
+     * 
+     * Border - границы карты
+     */
     class Border : Creature
     {
         public int X;

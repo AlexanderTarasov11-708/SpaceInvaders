@@ -14,6 +14,7 @@ namespace SpaceInvaders
 
         public Player(int y, int x) { X = x; Y = y; }
 
+        //действие
         public void Act()
         {
             if (Console.KeyAvailable)
@@ -42,6 +43,7 @@ namespace SpaceInvaders
             }
         }
 
+        //перемещение
         public void GoTo(int deltaX, int deltaY)
         {
             if (Game.Map[Y + deltaY, X + deltaX] == null)

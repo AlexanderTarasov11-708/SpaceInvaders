@@ -6,11 +6,14 @@
      * Александр Тарасов 11-708
      * Никита Хохлов 11-708
      * 
-     * Creature - интерфейс существо, расположенное в клетке карты 
+     * Boss - босс в финальной волне
      */
-    public interface Creature
+    class Boss : Alien
     {
-        void Act();
-        bool Conflict();
+        public Boss(int y, int x) : base(y, x)
+        {
+            X = x;
+            Y = y;
+        }
     }
 }

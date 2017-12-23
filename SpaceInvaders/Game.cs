@@ -1,21 +1,29 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpaceInvaders
 {
+    /* 
+     * Space Invaders 
+     * 3-я семестровая работа
+     * Александр Тарасов 11-708
+     * Никита Хохлов 11-708
+     * 
+     * Game - основной класс игры
+     * Прохождение по карте, очки, здоровье, волны, вывод на консоль
+     */
     public static class Game
     {
         public static Creature[,] Map;
         public static bool EndGame = false;
         public static int maxHealth = 200;
         public static int yourPoints = 0;
+        public static int bossHP = 100;
         public static int yourHealth = maxHealth;
         public static Random Rand = new Random();
         public static int numberOfAliens;
         public static int wave = 1;
+        public static bool boss = false;
 
 
         private static char[,] NewMap = new char[20, 21]
@@ -79,7 +87,7 @@ namespace SpaceInvaders
             Console.WriteLine("After 5 shoots from one position you have 'cooldown' and have to move left/right");
             Console.WriteLine("Every next wave you get +1 alien");
             Console.WriteLine("Every 5th wave you get +20 health");
-            Console.WriteLine("19th wave is the last one \n");
+            Console.WriteLine("16th wave is the last one where you have to kill the boss\n");
             Console.WriteLine("Press Enter to start");
             do
             {
@@ -94,8 +102,10 @@ namespace SpaceInvaders
                 Console.WriteLine("Wave: " + wave);
                 Console.Write("Cooldown: ");
                 if (Player.cd == 5)
-                    Console.Write("Yes");
-                else Console.Write("No");
+                    Console.WriteLine("Yes");
+                else Console.WriteLine("No");
+                if (boss)
+                    Console.WriteLine("Boss HP: " + bossHP);
 
                 foreach (var e in Map)
                     if (e != null)
@@ -105,7 +115,7 @@ namespace SpaceInvaders
                     wave++;
                     if (wave % 5 == 0)
                         yourHealth += 20;
-                    if (wave < 19)
+                    if (wave < 2)
                     {
                         List<int> check = new List<int>();
                         for (int i = 0; i < wave; i++)
@@ -120,16 +130,27 @@ namespace SpaceInvaders
                         }
                     }
                     else
-                        EndGame = true;
+                    {
+                        if (!boss)
+                        {
+                            Map[1, 1] = new Boss(1, 1);
+                            boss = true;
+                        }
+
+                    }
                 }
                 if (yourHealth <= 0)
+                    EndGame = true;
+
+                if (bossHP <= 0)
                 {
+                    yourPoints += 500;
                     EndGame = true;
                 }
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(60);
                 Console.Clear();
             }
-            if (numberOfAliens == 0 && yourHealth > 0)
+            if ((numberOfAliens == 0 && yourHealth > 0) || bossHP <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("You Win! Your score: " + yourPoints);
@@ -145,6 +166,7 @@ namespace SpaceInvaders
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
 
+        //вывод на консоль
         private static void WriteMap()
         {
             numberOfAliens = 0;
@@ -154,7 +176,12 @@ namespace SpaceInvaders
                 {
                     if (Map[i, j] is Player)
                         Console.Write('W');
-                    if (Map[i, j] is Alien)
+                    if (Map[i, j] is Boss)
+                    {
+                        Console.Write('@');
+                        numberOfAliens++;
+                    }
+                    else if (Map[i, j] is Alien)
                     {
                         numberOfAliens++;
                         Console.Write('V');
@@ -195,7 +222,7 @@ namespace SpaceInvaders
                         Console.Write("\t Every 5th wave you get +20 health");
                         break;
                     case 8:
-                        Console.Write("\t 19th wave is the last one");
+                        Console.Write("\t 16th wave is the last one where you have to kill the boss");
                         break;
                 }
 
