@@ -17,7 +17,7 @@ namespace SpaceInvaders
         public void Act()
         {
             if (Y == 18) Game.EndGame = true;
-            int move = Game.Rand.Next(1, 40);
+            int move = Game.Rand.Next(1, 33);
             switch (move)
             {
                 case 1:
