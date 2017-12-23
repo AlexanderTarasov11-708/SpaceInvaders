@@ -81,7 +81,7 @@ namespace SpaceInvaders
             Console.WriteLine("After 5 shoots from one position you have 'cooldown' and have to move left/right");
             Console.WriteLine("Every next wave you get +1 alien");
             Console.WriteLine("Every 5th wave you get +20 health");
-            Console.WriteLine("20th wave is the last one \n");
+            Console.WriteLine("16th wave is the last one \n");
             Console.WriteLine("Press Enter to start");
             do
             {
@@ -109,7 +109,7 @@ namespace SpaceInvaders
                     wave++;
                     if (wave % 5 == 0)
                         yourHealth += 20;
-                    if (wave < 20)
+                    if (wave < 16)
                     {
                         List<int> check = new List<int>();
                         for (int i = 0; i < wave; i++)
